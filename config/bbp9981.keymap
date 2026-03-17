@@ -25,51 +25,52 @@
 
  / {
     behaviors {
+
+        /* ===== RECENT (앱 스위처) ===== */
+        app_switch: app_switch {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <
+                &kp LALT
+                &kp TAB
+            >;
+        };
+
         td0: tap_dance_0 {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <400>;
             bindings = <&mkp LCLK>, <&bt BT_CLR>;
         };
-    };
 
-    behaviors {
         td_boot_out: td_boot_out {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <400>;
             bindings = <&bootloader>, <&out OUT_TOG>;
         };
-    };
 
-    behaviors {
         tdc_to_SYM: td_comma_to_layer {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <400>;
             bindings = <&kp SEMI>, <&to SYM>;
         };
-    };
 
-    behaviors {
         tdc_to_MEDIA: td_mute_to_layer {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <400>;
             bindings = <&kp C_MUTE>, <&to MEDIA>;
         };
-    };
 
-    behaviors {
         hm: homerow_mods {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <400>;
             bindings = <&kp &kp>;
         };
-    };
 
-    behaviors {
         sl_mo: behavior_sl_mo {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -77,9 +78,7 @@
             tapping-term-ms = <450>;
             bindings = <&mo &sl>;
         };
-    };
 
-    behaviors {
         sk_kp: behavior_sk_kp {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -87,9 +86,7 @@
             tapping-term-ms = <450>;
             bindings = <&kp &sk>;
         };
-    };
 
-    behaviors {
         bhm: balanced_homerow_mods {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -108,10 +105,10 @@
 /* 상단 사이드 버튼 */
 &mkp RCLK      &mkp LCLK
 
-/* 터치패드 옆 기능키 4개 */
-&kp CLCK       &kp C_AC_NEXT    &kp BSPC     &kp C_AC_HOME
+/* 터치패드 옆 기능키 */
+&kp CLCK       &app_switch    &kp BSPC     &none
 
-/* 메인 키 */
+/* 메인 */
 &kp Q      &kp W      &kp E               &kp R           &kp T           &kp Y        &kp U  &kp I  &kp O        &kp P
 &kp A      &kp S      &kp D               &kp F           &kp G           &kp H        &kp J  &kp K  &kp L        &kp BSPC
 &kp LSHFT  &kp Z      &kp X               &kp C           &kp V           &kp B        &kp N  &kp M  &tdc_to_SYM  &kp ENTER
